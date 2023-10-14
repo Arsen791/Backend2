@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+  <title>Problems</title>
+
+{% endblock %}
+{% block content %}
+
+  <div class="card-group" >
+
+              <div class="card1" style="border: 1px solid; padding: 10px; width: 700px;">
+                   <h3 class="card-title">Name:  {{problems.firstname}}</h3>
+				   <p class="card-text">Number:  {{problems.number}}</p>
+				   <p class="card-text">Email:  {{problems.email}}</p>
+                   <p class="card-text">Priority:  {{problems.priority}}</p>
+				   <p class="card-text">Created at:  {{ problems.created_at }}</p>
+                    {% for user_action in user_actions %}
+                    <p  class="card-text">{{user_action.action}}</p>
+                    {% endfor %}
+
+                   <form name="create_action" action="user_action-create/" method="POST" novalidate>
+                    {% csrf_token %}
+                      {% for field in form %}
+                          <div class="field-wrapper">
+                               {{ field }}<div class="labeli">{{ field.label }} </div> 
+                          </div>
+                      {% endfor %}
+                      {% if user_is_reception %}
+                        {% for field in form1 %}
+                            <div class="field-wrapper">
+                                {{ field }}<div class="labeli">{{ field.label }} </div> 
+                            </div>
+                        {% endfor %}
+                      {% elif user_is_tester %}
+                        {% for field in form2 %}
+                            <div class="field-wrapper">
+                                {{ field }}<div class="labeli">{{ field.label }} </div> 
+                            </div>
+                        {% endfor %}
+                      {% endif %}
+                      {% for field in form3 %}
+                      <div class="field-wrapper">
+                           {{ field }}<div class="labeli">{{ field.label }} </div> 
+                      </div>
+                  {% endfor %}
+
+                    <button class="btn" type="submit">Save</button>
+                  </form>
+              </div>   
+
+            
+  </div>
+
+{% endblock %}
+

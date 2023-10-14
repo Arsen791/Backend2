@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <title>Registration</title>
+    <style>
+
+        .field_wrapper {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="basy">
+<div class="container">
+        <div class="login-row">
+
+            <form name="register" method="POST" novalidate>
+              <h2>Registration</h2>
+              {% csrf_token %}
+                {% for field in form %}
+                    <div class="field-wrapper">
+                        {{ field }}<div class="labeli">{{ field.label }} </div> 
+                    </div>
+                    <div class="text-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+              <button class="btn" type="submit">Register</button>
+              <a href="/auth/login/" class="text-center">Already signed? Login</a>
+            </form>
+            
+        </div>
+  </div>
+</div>
+{% endblock %}
