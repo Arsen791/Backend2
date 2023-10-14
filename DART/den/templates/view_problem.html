@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+  <title>Problems</title>
+
+{% endblock %}
+{% block content %}
+
+  <div class="card-group" >
+    {% for problem in problems %}
+    <a style="text-decoration: none;" href="details_problems/{{problem.id}}/">
+              <div class="card">
+                   <h3 class="card-title">Name: {{problem.firstname}}</h3>
+                   <p class="card-text">Priority: {{problem.priority}}</p>
+                   <p  class="card-text">Status: {{problem.status}}</p>
+                   <p  class="card-text">Assigned User: {{problem.assigned_user}}</p>
+                    {% for user_action in user_actions %}
+                     {% if user_action.id == problem.id %}
+                    <p  class="card-text">Action: {{user_action.action}}</p>
+                    {% endif %}
+                    {% endfor %}
+
+              </div>
+            </a>   
+    {% endfor %}
+            
+  </div>
+
+{% endblock %}
+
